@@ -15,6 +15,11 @@ void DemoFlight();
 void DemoMovie();
 void DemoTime();
 
+//2.2.4.4
+
+void WrongPointers();
+
+
 //2.2.2.1
 
 struct Rectangle {
@@ -40,6 +45,21 @@ struct Time {
     int Sec;
 };
 
+//2.2.5.1
+void WriteRectangle(Rectangle& rectangle);
+
+//2.2.5.2
+void ReadRectangle(Rectangle& rectangle);
+
+//2.2.5.3
+void DemoReadAndWriteRectangles();
+
+//2.2.5.4
+void Exchange(Rectangle& rectangle1, Rectangle& rectangle2);
+
+//2.2.5.5
+void FindRectangle(Rectangle* rectangles, int count);
+
 //2.2.2.2
 
 struct Contact {
@@ -61,7 +81,7 @@ struct Discipline {
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    DemoMovie();
+    DemoRectangle();
 }
 
 //2.2.1.1 and 2.2.1.2
@@ -85,8 +105,7 @@ void Sort(double* values, int count) {
         throw exception();
     }
 }
-void DemoSort()
-{
+void DemoSort() {
     int count = 5;
     double* values = new double[count] {100.0, 249.0, 12.0, 45.0, 23.5};
     try {
@@ -142,6 +161,18 @@ void DemoRectangle() {
 
     cout << "Адрес в первой указателе:" << p << endl;
     cout << "Адрес во втором указателе:" << point << endl;
+
+    Exchange(massRectangle[0], massRectangle[1]);
+
+    cout << "Это massRectangle[0]: " << endl;
+    cout << "Ширина и высота прямоугольника: " << massRectangle[0].Width << "x" << massRectangle[0].Height;
+    cout << " цвет (eng): " << massRectangle[0].Color << endl;
+    cout << "Это massRectangle[1]: " << endl;
+    cout << "Ширина и высота прямоугольника: " << massRectangle[1].Width << "x" << massRectangle[1].Height;
+    cout << " цвет (eng): " << massRectangle[1].Color << endl;
+
+    
+
 }
 
 void DemoFlight() {
@@ -287,4 +318,69 @@ void DemoTime() {
 
     cout << "Адрес в первой указателе:" << p << endl;
     cout << "Адрес во втором указателе:" << point << endl;
+}
+
+//2.2.4.4
+
+void WrongPointers() {
+    Flight flight;
+    Movie movie;
+    Flight* pointerFlight = &flight;
+    Movie* pointerMovie = &movie;
+    //Flight* point = &movie;
+    //Movie* pointer = &flight;
+}
+
+//2.2.5.1
+
+void WriteRectangle(Rectangle& rectangle) {
+    cout << "Размер прямоугольника: " << rectangle.Width << "x" << rectangle.Height << ", его цвет: " << rectangle.Color << endl;
+}
+
+//2.2.5.2
+
+void ReadRectangle(Rectangle& rectangle) {
+    cout << "Введите цвет прямоугольника: ";
+    cin >> rectangle.Color;
+    cout << "Введите ширину прямоугольника: ";
+    cin >> rectangle.Width;
+    cout << "Введите высоту прямоугольника: ";
+    cin >> rectangle.Height;
+}
+
+//2.2.5.3
+
+void DemoReadAndWriteRectangles() {
+    Rectangle rectangle[5];
+    for (int i = 0; i < 5; i++) {
+        ReadRectangle(rectangle[i]);
+    }
+    for (int i = 0; i < 5; i++) {
+        WriteRectangle(rectangle[i]);
+    }
+}
+
+//2.2.5.4
+
+void Exchange(Rectangle& rectangle1, Rectangle& rectangle2) {
+    Rectangle swap;
+    swap = rectangle1;
+    rectangle1 = rectangle2;
+    rectangle2 = swap;
+}
+
+//2.2.5.5
+
+void FindRectangle(Rectangle* rectangles, int count) {
+    double maxWidth = rectangles[0].Width;
+    string maxColor = rectangles[0].Color;
+    double maxHeight = rectangles[0].Height;
+    for (int i = 1; i < count; i++) {
+        if (maxWidth < rectangles[i].Width) {
+            maxWidth = rectangles[i].Width;
+            maxColor = rectangles[i].Color;
+            maxHeight = rectangles[i].Height;
+        }
+    }
+    cout << "Прямоугольник с самой большой шириной: " << maxWidth << "x" << maxHeight << ", цвет: " << maxColor;
 }
