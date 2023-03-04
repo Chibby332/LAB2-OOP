@@ -114,9 +114,35 @@ Flight* CopyFlight(Flight& flight);
 Movie* CopyMovie(Movie& movie);
 Time* CopyTime(Time& time);
 
+//2.2.8.1 
+enum class Color {red,orange,yellow,green,lightblue,blue,purple};
+enum class Day {monday,tuesday,wednesday,thursday,friday,saturday,sunday};
+enum class Genre {comedy,drama,thriller,action,horror,blockbuster};
+
+//2.2.8.2
+enum class EducationsForm {очное, заочное, вечернее, дистанционное};
+enum class PhonesFirm {Samsung, Apple, Xiaomi, Huawei, Nokia};
+enum class Seasons {Winter, Spring, Summer, Autumn};
+
+//2.2.8.3 and 2.2.8.4
+void DemoEnums();
+
+//2.2.8.5
+void WriteColor(Color color);
+
+//2.2.8.6
+Color ReadColor();
+
+//2.2.8.7
+int CountRed(Color* colors, int count);
+
+//2.2.8.8
+int CountColor(Color* colors, int count, Color findedColor);
+
 int main()
 {
     setlocale(LC_ALL, "Russian");
+    DemoEnums();
 }
 
 //2.2.1.1 and 2.2.1.2
@@ -593,4 +619,147 @@ Time* CopyTime(Time& time) {
      timeCopied->Min = time.Min;
      timeCopied->Sec = time.Sec;
      return timeCopied;
+}
+
+//2.2.8.3
+
+void DemoEnums() {
+    Color color = Color::blue;
+    Day today = Day::tuesday;
+    Genre genre = Genre::thriller;
+    EducationsForm educ = EducationsForm::очное;
+    PhonesFirm firm = PhonesFirm::Nokia;
+    Seasons season = Seasons::Autumn;
+    
+    Color colour[6];
+    Day day[6];
+    Genre massGenre[6];
+    EducationsForm massEduc[6];
+    PhonesFirm massFirm[6];
+    Seasons massSeason[6];
+
+    colour[0] = Color::red;
+    colour[1] = Color::orange;
+    colour[2] = Color::red;
+    colour[3] = Color::purple;
+    colour[4] = Color::red;
+    colour[5] = Color::yellow;
+
+    day[0] = Day::saturday;
+    day[1] = Day::saturday;
+    day[2] = Day::saturday;
+    day[3] = Day::wednesday;
+    day[4] = Day::saturday;
+    day[5] = Day::sunday;
+
+    massGenre[0] = Genre::comedy;
+    massGenre[1] = Genre::comedy;
+    massGenre[2] = Genre::comedy;
+    massGenre[3] = Genre::comedy;
+    massGenre[4] = Genre::comedy;
+    massGenre[5] = Genre::comedy;
+
+    massEduc[0] = EducationsForm::заочное;
+    massEduc[1] = EducationsForm::заочное;
+    massEduc[2] = EducationsForm::заочное;
+    massEduc[3] = EducationsForm::заочное;
+    massEduc[4] = EducationsForm::заочное;
+    massEduc[5] = EducationsForm::заочное;
+
+    massFirm[0] = PhonesFirm::Apple;
+    massFirm[1] = PhonesFirm::Apple;
+    massFirm[2] = PhonesFirm::Apple;
+    massFirm[3] = PhonesFirm::Apple;
+    massFirm[4] = PhonesFirm::Apple;
+    massFirm[5] = PhonesFirm::Apple;
+
+    massSeason[0] = Seasons::Autumn;
+    massSeason[1] = Seasons::Autumn;
+    massSeason[2] = Seasons::Autumn;
+    massSeason[3] = Seasons::Autumn;
+    massSeason[4] = Seasons::Autumn;
+    massSeason[5] = Seasons::Autumn;
+    cout << CountColor(colour, 6, Color::purple);
+}
+
+//2.2.8.5
+
+void WriteColor(Color color) {
+    switch (color)
+    {
+    case Color::red:
+        cout << "Красный цвет";
+        break;
+    case Color::orange:
+        cout << "Оранжевый цвет";
+        break;
+    case Color::yellow:
+        cout << "Желтый цвет";
+        break;
+    case Color::green:
+        cout << "Зеленый цвет";
+        break;
+    case Color::lightblue:
+        cout << "Голубой цвет";
+        break;
+    case Color::blue:{
+        cout << "Синий цвет";
+        break;
+    }
+        
+    case Color::purple:
+        cout << "Фиолетовый цвет";
+        break;
+    default:
+        break;
+    }
+}
+
+//2.2.8.6
+
+Color ReadColor() {
+    int a;
+    cout << "Введите число от 0 до 6 (0 – красный, 1 – оранжевый, 2 – желтый, 3 – зеленый, 4 – голубой, 5 – синий, 6 – фиолетовый): ";
+    cin >> a;
+    switch (a)
+    {
+    case 0:
+        return Color::red;
+    case 1:
+        return Color::orange;
+    case 2:
+        return Color::yellow;
+    case 3:
+        return Color::green;
+    case 4:
+        return Color::lightblue;
+    case 5:
+        return Color::blue;
+    case 6:
+        return Color::purple;
+    default:
+        break;
+    }
+}
+
+//2.2.8.7
+
+int CountRed(Color* colors, int count) {
+    int res = 0;
+    for (int i = 0; i < count; i++) {
+        if (colors[i] == Color::red) {
+            res++;
+        }
+    }
+    return res;
+}
+
+int CountColor(Color* colors, int count, Color findedColor) {
+    int res = 0;
+    for (int i = 0; i < count; i++) {
+        if (colors[i] == findedColor) {
+            res++;
+        }
+    }
+    return res;
 }
