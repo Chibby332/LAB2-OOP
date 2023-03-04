@@ -90,10 +90,33 @@ struct Discipline {
     int Duration;
 };
 
+//2.2.7.1
+struct Circle
+{
+    double X; 
+    double Y; 
+    double Radius; 
+    string Color; 
+};
+
+Circle* MakeCircle(double x, double y, double radius, string color);
+Circle* CopyCircle(Circle& circle);
+
+//2.2.7.2
+Rectangle* MakeRectangle(string color, double width, double height);
+Flight* MakeFlight(string dep, string des, int time);
+Movie* MakeMovie(string name, string genre, int length, int year, double rate);
+Time* MakeTime(int hour, int min, int sec);
+
+//2.2.7.3
+Rectangle* CopyRectangle(Rectangle& rectangle);
+Flight* CopyFlight(Flight& flight);
+Movie* CopyMovie(Movie& movie);
+Time* CopyTime(Time& time);
+
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    DemoDynamicFlights();
 }
 
 //2.2.1.1 and 2.2.1.2
@@ -468,4 +491,106 @@ void FindShortestFlight(Flight* flights, int count) {
     }
     cout << "Самый короткий рейс:" << endl;
     cout << "Рейс: " << minDep << " - " << minDes << ", время полета: " << minTime << endl;
+}
+
+//2.2.7.1
+
+Circle* MakeCircle(double x, double y, double radius, string color) {
+    Circle* circle = new Circle();
+    circle->X = x;
+    circle->Y = y;
+    circle->Radius = radius;
+    circle->Color = color;
+    return circle;
+}
+
+Circle* CopyCircle(Circle& circle) {
+    Circle* circleCopied = new Circle();
+    circleCopied->X = circle.X;
+    circleCopied->Y = circle.Y;
+    circleCopied->Radius = circle.Radius;
+    circleCopied->Color = circle.Color;
+    return circleCopied;
+}
+
+void DemoCircle()
+{
+    Circle* circle1 = MakeCircle(5.0,7.0,7.5,"Red");
+    Circle* circle2 = MakeCircle(2.0, -12.0, 12.75, "Green");
+    Circle* circle3 = MakeCircle(-10.0, 10.0, 1.45, "Blue");
+
+    Circle* copiedCircle1 = CopyCircle(*circle1);
+    Circle* copiedCircle2 = CopyCircle(*circle2);
+    Circle* copiedCircle3 = CopyCircle(*circle3);
+}
+
+//2.2.7.2
+
+Rectangle* MakeRectangle(string color, double width, double height) {
+    Rectangle* rectangle = new Rectangle();
+    rectangle->Color = color;
+    rectangle->Width = width;
+    rectangle->Height = height;
+    return rectangle;
+}
+
+Flight* MakeFlight(string dep, string des, int time) {
+    Flight* flight = new Flight();
+    flight->Departure = dep;
+    flight->Destination = des;
+    flight->Time = time;
+    return flight;
+}
+
+Movie* MakeMovie(string name, string genre, int length, int year, double rate) {
+    Movie* movie = new Movie();
+    movie->Name = name;
+    movie->Genre = genre;
+    movie->Length = length;
+    movie->Year = year;
+    movie->Rating = rate;
+    return movie;
+}
+
+Time* MakeTime(int hour,int min, int sec) {
+    Time* time = new Time();
+    time->Hour = hour;
+    time->Min = min;
+    time->Sec = sec;
+    return time;
+}
+//2.2.7.3
+
+Rectangle* CopyRectangle(Rectangle& rectangle) {
+    Rectangle* rectangleCopied = new Rectangle();
+    rectangleCopied->Color = rectangle.Color;
+    rectangleCopied->Height = rectangle.Height;
+    rectangleCopied->Width = rectangle.Width;
+    return rectangleCopied;
+}
+
+Flight* CopyFlight(Flight& flight) {
+    Flight* flightCopied = new Flight();
+    flightCopied->Departure = flight.Departure;
+    flightCopied->Destination = flight.Destination;
+    flightCopied->Time = flight.Time;
+    return flightCopied;
+}
+
+Movie* CopyMovie(Movie& movie) {
+    Movie* movieCopied = new Movie();
+    movieCopied->Name = movie.Name;
+    movieCopied->Genre = movie.Genre;
+    movieCopied->Length = movie.Length;
+    movieCopied->Year = movie.Year;
+    movieCopied->Rating = movie.Rating;
+    return movieCopied;
+}
+
+Time* CopyTime(Time& time) {
+     Time* timeCopied = new Time();
+     timeCopied->Hour = time.Hour;
+     timeCopied->Min = time.Min;
+     timeCopied->Sec = time.Sec;
+     return timeCopied;
 }
