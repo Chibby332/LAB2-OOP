@@ -3,6 +3,7 @@
 #include <string.h>
 using namespace std;
 
+enum class Genre { comedy, drama, thriller, action, horror, blockbuster };
 //2.2.1.1 and 2.2.1.2
 
 void Sort(double* values, int count);
@@ -34,7 +35,7 @@ struct Flight {
 };
 struct Movie {
     string Name;
-    string Genre;
+    Genre Genree;
     int Length;
     int Year; 
     double Rating;
@@ -105,7 +106,7 @@ Circle* CopyCircle(Circle& circle);
 //2.2.7.2
 Rectangle* MakeRectangle(string color, double width, double height);
 Flight* MakeFlight(string dep, string des, int time);
-Movie* MakeMovie(string name, string genre, int length, int year, double rate);
+Movie* MakeMovie(string name, Genre genre1, int length, int year, double rate);
 Time* MakeTime(int hour, int min, int sec);
 
 //2.2.7.3
@@ -117,7 +118,7 @@ Time* CopyTime(Time& time);
 //2.2.8.1 
 enum class Color {red,orange,yellow,green,lightblue,blue,purple};
 enum class Day {monday,tuesday,wednesday,thursday,friday,saturday,sunday};
-enum class Genre {comedy,drama,thriller,action,horror,blockbuster};
+
 
 //2.2.8.2
 enum class EducationsForm {очное, заочное, вечернее, дистанционное};
@@ -139,10 +140,19 @@ int CountRed(Color* colors, int count);
 //2.2.8.8
 int CountColor(Color* colors, int count, Color findedColor);
 
+//2.2.9.2
+void DemoMovieWithGenre();
+
+//2.2.9.4
+int CountMoviesByGenre(Movie* movies, int count, Genre findGenre);
+
+//2.2.9.5
+Movie* FindBestGenreMovie(Movie* movies, int count, Genre findGenre);
+
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    DemoEnums();
+    DemoMovieWithGenre();
 }
 
 //2.2.1.1 and 2.2.1.2
@@ -283,9 +293,9 @@ void DemoMovie() {
     Movie massMovie[3];
     Movie* p = &movie;
     Movie* point = &movie;
-
+    int x;
     movie.Name = "Star Wars";
-    movie.Genre = "Drama";
+    movie.Genree = Genre::thriller;
     movie.Length = 180;  
     movie.Year = 2323;
     movie.Rating = 7.2;
@@ -293,8 +303,8 @@ void DemoMovie() {
 
     cout << "Введите название фильма: ";
     cin >> newMovie.Name;
-    cout << "Введите жанр фильма: ";
-    cin >> newMovie.Genre;
+    cout << "Введите жанр фильма (0 - комедия, 1 - драма, 2 - триллер, 3 - экшн, 4 - хоррор, 5 - блокбастер): ";
+    cin >> x;
     cout << "Введите длину фильма в минутах: ";
     cin >> newMovie.Length;
     cout << "Введите год выхода фильма: ";
@@ -302,36 +312,108 @@ void DemoMovie() {
     cout << "Введите рейтинг фильма: ";
     cin >> newMovie.Rating;
   
-    cout << "Фильм: " << newMovie.Name << ", жанр: " << newMovie.Genre << ", продолжительность: " << newMovie.Length << ", год выхода: " <<
+    cout << "Фильм: " << newMovie.Name << ", жанр: ";
+    switch (x)
+    { 
+    case 0:
+        cout << "Комедия";
+        break;
+    case 1:
+        cout << "Драма";
+        break;
+    case 2:
+        cout << "Триллер";
+        break;
+    case 3:
+        cout << "Экшн";
+        break;
+    case 4:
+        cout << "Хоррор";
+        break;
+    case 5:
+        cout << "Блокбастер";
+        break;
+    default:
+        break;
+    }
+    cout<< ", продолжительность: " << newMovie.Length << ", год выхода: " <<
         newMovie.Year << ", оценка: " << newMovie.Rating << endl;
 
     massMovie[0].Name = "AAA";
-    massMovie[0].Genre = "111";
+    massMovie[0].Genree = Genre::action;
     massMovie[0].Length = 200;
     massMovie[0].Year = 1999;
     massMovie[0].Rating = 6.6;
     
 
     massMovie[1].Name = "BBB";
-    massMovie[1].Genre = "222";
+    massMovie[1].Genree = Genre::drama;
     massMovie[1].Length = 190;
     massMovie[1].Year = 2000;
     massMovie[1].Rating = 6.7;
     
 
     massMovie[2].Name = "CCC";
-    massMovie[2].Genre = "333";
+    massMovie[2].Genree = Genre::blockbuster;
     massMovie[2].Length = 180;
     massMovie[2].Year = 2001;
     massMovie[2].Rating = 6.8;
     
 
     for (int i = 0; i < 3; i++) {
-        cout << "Фильм: " << massMovie[i].Name << ", жанр: " << massMovie[i].Genre << ", продолжительность: " << massMovie[i].Length << ", год выхода: " <<
+        cout << "Фильм: " << massMovie[i].Name << ", жанр: ";
+        switch (massMovie[i].Genree)
+        {
+        case Genre::comedy:
+            cout << "Комедия";
+            break;
+        case Genre::drama:
+            cout << "Драма";
+            break;
+        case Genre::thriller:
+            cout << "Триллер";
+            break;
+        case Genre::action:
+            cout << "Экшн";
+            break;
+        case Genre::horror:
+            cout << "Хоррор";
+            break;
+        case Genre::blockbuster:
+            cout << "Блокбастер";
+            break;
+        default:
+            break;
+        }
+        cout << ", продолжительность: " << massMovie[i].Length << ", год выхода: " <<
             massMovie[i].Year << ", оценка: " << massMovie[i].Rating << endl;
     }
 
-    cout << "Фильм: " << p->Name << ", жанр: " << p->Genre << ", продолжительность: " << p->Length << ", год выхода: " <<
+    cout << "Фильм: " << p->Name << ", жанр: "; 
+    switch (p->Genree)
+    {
+    case Genre::comedy:
+        cout << "Комедия";
+        break;
+    case Genre::drama:
+        cout << "Драма";
+        break;
+    case Genre::thriller:
+        cout << "Триллер";
+        break;
+    case Genre::action:
+        cout << "Экшн";
+        break;
+    case Genre::horror:
+        cout << "Хоррор";
+        break;
+    case Genre::blockbuster:
+        cout << "Блокбастер";
+        break;
+    default:
+        break;
+    }
+    cout << ", продолжительность: " << p->Length << ", год выхода: " <<
         p->Year << ", оценка: " << p->Rating << endl;
 
     cout << "Адрес в первой указателе:" << p << endl;
@@ -568,10 +650,10 @@ Flight* MakeFlight(string dep, string des, int time) {
     return flight;
 }
 
-Movie* MakeMovie(string name, string genre, int length, int year, double rate) {
+Movie* MakeMovie(string name, Genre genre, int length, int year, double rate) {
     Movie* movie = new Movie();
     movie->Name = name;
-    movie->Genre = genre;
+    movie->Genree = genre;
     movie->Length = length;
     movie->Year = year;
     movie->Rating = rate;
@@ -606,7 +688,7 @@ Flight* CopyFlight(Flight& flight) {
 Movie* CopyMovie(Movie& movie) {
     Movie* movieCopied = new Movie();
     movieCopied->Name = movie.Name;
-    movieCopied->Genre = movie.Genre;
+    movieCopied->Genree = movie.Genree;
     movieCopied->Length = movie.Length;
     movieCopied->Year = movie.Year;
     movieCopied->Rating = movie.Rating;
@@ -679,7 +761,6 @@ void DemoEnums() {
     massSeason[3] = Seasons::Autumn;
     massSeason[4] = Seasons::Autumn;
     massSeason[5] = Seasons::Autumn;
-    cout << CountColor(colour, 6, Color::purple);
 }
 
 //2.2.8.5
@@ -754,6 +835,8 @@ int CountRed(Color* colors, int count) {
     return res;
 }
 
+//2.2.8.8
+
 int CountColor(Color* colors, int count, Color findedColor) {
     int res = 0;
     for (int i = 0; i < count; i++) {
@@ -762,4 +845,62 @@ int CountColor(Color* colors, int count, Color findedColor) {
         }
     }
     return res;
+}
+
+//2.2.9.2
+
+void DemoMovieWithGenre() {
+    Movie movie;
+    Movie* res;
+    Movie* movie2 = MakeMovie("AAA", Genre::comedy, 190, 2000, 8.3);
+    Movie massMovie[10];
+    movie.Name = "AAAAA";
+    movie.Genree = Genre::action;
+    movie.Length = 190;
+    movie.Year = 1999;
+    movie.Rating = 9.9;
+    delete movie2;
+
+    massMovie[0] = *MakeMovie("AAA", Genre::comedy, 200, 2000, 1);
+    massMovie[1] = *MakeMovie("BBB", Genre::action, 200, 2000, 2);
+    massMovie[2] = *MakeMovie("CCC", Genre::comedy, 200, 2000, 3);
+    massMovie[3] = *MakeMovie("DDD", Genre::comedy, 200, 2000, 4);
+    massMovie[4] = *MakeMovie("EEE", Genre::blockbuster, 200, 2000, 5.6);
+    massMovie[5] = *MakeMovie("FFF", Genre::comedy, 200, 2000, 6);
+    massMovie[6] = *MakeMovie("GGG", Genre::comedy, 200, 2000, 10);
+    massMovie[7] = *MakeMovie("HHH", Genre::comedy, 200, 2000, 7);
+    massMovie[8] = *MakeMovie("III", Genre::comedy, 200, 2000, 8);
+    massMovie[9] = *MakeMovie("JJJ", Genre::thriller, 200, 2000, 9.3);
+    cout << CountMoviesByGenre(massMovie, 10, Genre::comedy) << endl;
+    res = FindBestGenreMovie(massMovie,10,Genre::comedy);
+    cout << res->Name;
+   
+}
+
+//2.2.9.4
+
+int CountMoviesByGenre(Movie* movies, int count, Genre findGenre) {
+    int res = 0;
+    for (int i = 0; i < count; i++) {
+        if (movies[i].Genree == findGenre) {
+            res++;
+        }
+    }
+    return res;
+}
+
+//2.2.9.5
+
+Movie* FindBestGenreMovie(Movie* movies, int count, Genre findGenre) {
+    double maxRate = -10000;
+    Movie* bestMovie = nullptr;
+    for (int i = 0; i < count; i++) {
+        if (movies[i].Genree == findGenre) {
+            if (maxRate < movies[i].Rating) {
+                maxRate = movies[i].Rating;
+                bestMovie = &movies[i];
+            }
+        }
+    }
+    return bestMovie;
 }
