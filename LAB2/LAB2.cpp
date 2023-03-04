@@ -60,6 +60,9 @@ void Exchange(Rectangle& rectangle1, Rectangle& rectangle2);
 //2.2.5.5
 void FindRectangle(Rectangle* rectangles, int count);
 
+//2.2.5.6
+void FindMaxRectangle(Rectangle* rectangles, int count);
+
 //2.2.2.2
 
 struct Contact {
@@ -144,7 +147,7 @@ void DemoRectangle() {
     massRectangle[0].Height = 22;
 
     massRectangle[1].Color = "BBB";
-    massRectangle[1].Width = 33;
+    massRectangle[1].Width = 333;
     massRectangle[1].Height = 44;
 
     massRectangle[2].Color = "CCC";
@@ -172,7 +175,7 @@ void DemoRectangle() {
     cout << " цвет (eng): " << massRectangle[1].Color << endl;
 
     
-
+    FindMaxRectangle(massRectangle, 3);
 }
 
 void DemoFlight() {
@@ -383,4 +386,22 @@ void FindRectangle(Rectangle* rectangles, int count) {
         }
     }
     cout << "Прямоугольник с самой большой шириной: " << maxWidth << "x" << maxHeight << ", цвет: " << maxColor;
+}
+
+//2.2.5.6
+
+void FindMaxRectangle(Rectangle* rectangles, int count) {
+    double maxWidth = rectangles[0].Width;
+    string maxColor = rectangles[0].Color;
+    double maxHeight = rectangles[0].Height;
+    double maxArea = rectangles[0].Height * rectangles[0].Width;
+    for (int i = 1; i < count; i++) {
+        if (maxArea < rectangles[0].Height * rectangles[0].Width) {
+            maxWidth = rectangles[i].Width;
+            maxColor = rectangles[i].Color;
+            maxHeight = rectangles[i].Height;
+            maxArea = rectangles[0].Height * rectangles[0].Width;
+        }
+    }
+    cout << "Прямоугольник с самой большой площадью: " << maxWidth << "x" << maxHeight << ", цвет: " << maxColor;
 }
