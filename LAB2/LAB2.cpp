@@ -61,7 +61,7 @@ struct Discipline {
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    DemoRectangle();
+    DemoMovie();
 }
 
 //2.2.1.1 and 2.2.1.2
@@ -97,15 +97,18 @@ void DemoSort()
     }
 }
 
-//2.2.3.1
+//2.2.3.(1,2,3) and 2.2.4.(1,2,3)
 
 void DemoRectangle() {
     Rectangle rectangle;
     Rectangle newRectangle;
     Rectangle massRectangle[3];
+    Rectangle* p = &rectangle;
+    Rectangle* point = &rectangle;
+
     rectangle.Color = "Red";
     rectangle.Width = 7.2;
-    rectangle.Height = 3.5;
+    rectangle.Height = 3.5;   
 
     cout << "Введите цвет прямоугольника: ";
     cin >> newRectangle.Color;
@@ -133,11 +136,21 @@ void DemoRectangle() {
         cout << "Ширина и высота прямоугольника: " << massRectangle[i].Width << "x" << massRectangle[i].Height;
         cout << " цвет (eng): " << massRectangle[i].Color << endl;
     }
+
+    cout << "Ширина и высота прямоугольника: " << p->Width << "x" << p->Height;
+    cout << " цвет (eng): " << p->Color << endl;
+
+    cout << "Адрес в первой указателе:" << p << endl;
+    cout << "Адрес во втором указателе:" << point << endl;
 }
+
 void DemoFlight() {
     Flight flight;
     Flight newFlight;
     Flight massFlight[3];
+    Flight* p = &flight;
+    Flight* point = &flight;
+
     flight.Departure = "Moscow";
     flight.Destination = "Berlin";
     flight.Time = 360;
@@ -166,11 +179,20 @@ void DemoFlight() {
     for (int i = 0; i < 3; i++) {
         cout << "Рейс: " << massFlight[i].Departure << " - " << massFlight[i].Destination << ", время полета: " << massFlight[i].Time << endl;
     }
+
+    cout << "Рейс: " << p->Departure << " - " << p->Destination << ", время полета: " << p->Time << endl;
+
+    cout << "Адрес в первой указателе:" << p << endl;
+    cout << "Адрес во втором указателе:" << point << endl;
 }
+
 void DemoMovie() {
     Movie movie;
     Movie newMovie;
     Movie massMovie[3];
+    Movie* p = &movie;
+    Movie* point = &movie;
+
     movie.Name = "Star Wars";
     movie.Genre = "Drama";
     movie.Length = 180;  
@@ -217,11 +239,21 @@ void DemoMovie() {
         cout << "Фильм: " << massMovie[i].Name << ", жанр: " << massMovie[i].Genre << ", продолжительность: " << massMovie[i].Length << ", год выхода: " <<
             massMovie[i].Year << ", оценка: " << massMovie[i].Rating << endl;
     }
+
+    cout << "Фильм: " << p->Name << ", жанр: " << p->Genre << ", продолжительность: " << p->Length << ", год выхода: " <<
+        p->Year << ", оценка: " << p->Rating << endl;
+
+    cout << "Адрес в первой указателе:" << p << endl;
+    cout << "Адрес во втором указателе:" << point << endl;
 }
+
 void DemoTime() {
     Time time;
     Time newTime;
     Time massTime[3];
+    Time* p = &time;
+    Time* point = &time;
+
     time.Hour = 12;
     time.Min = 45;
     time.Sec = 19;
@@ -250,4 +282,9 @@ void DemoTime() {
     for (int i = 0; i < 3; i++) {
         cout << "Время: " << massTime[i].Hour << ":" << massTime[i].Min << ":" << massTime[i].Sec << endl;
     }
+
+    cout << "Время: " << p->Hour << ":" << p->Min << ":" << p->Sec << endl;
+
+    cout << "Адрес в первой указателе:" << p << endl;
+    cout << "Адрес во втором указателе:" << point << endl;
 }
