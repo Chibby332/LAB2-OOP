@@ -18,9 +18,9 @@ void DemoTime();
 //2.2.2.1
 
 struct Rectangle {
-    double Width;
-    double Height;
     string Color;
+    double Width;
+    double Height;  
 };
 struct Flight {
     string Departure;
@@ -29,9 +29,9 @@ struct Flight {
 };
 struct Movie {
     string Name;
-    int Length;
-    int Year;
     string Genre;
+    int Length;
+    int Year; 
     double Rating;
 };
 struct Time {
@@ -60,9 +60,8 @@ struct Discipline {
 
 int main()
 {
-
-
-
+    setlocale(LC_ALL, "Russian");
+    DemoRectangle();
 }
 
 //2.2.1.1 and 2.2.1.2
@@ -102,28 +101,153 @@ void DemoSort()
 
 void DemoRectangle() {
     Rectangle rectangle;
+    Rectangle newRectangle;
+    Rectangle massRectangle[3];
     rectangle.Color = "Red";
-    rectangle.Height = 3.5;
     rectangle.Width = 7.2;
+    rectangle.Height = 3.5;
+
+    cout << "Введите цвет прямоугольника: ";
+    cin >> newRectangle.Color;
+    cout << "Введите ширину прямоугольника: ";
+    cin >> newRectangle.Width;
+    cout << "Введите высоту прямоугольника: ";
+    cin >> newRectangle.Height;
+
+    cout << "Ширина и высота прямоугольника: " << newRectangle.Width <<"x"<< newRectangle.Height;
+    cout << " цвет (eng): " << newRectangle.Color << endl;
+
+    massRectangle[0].Color = "AAA";
+    massRectangle[0].Width = 11;
+    massRectangle[0].Height = 22;
+
+    massRectangle[1].Color = "BBB";
+    massRectangle[1].Width = 33;
+    massRectangle[1].Height = 44;
+
+    massRectangle[2].Color = "CCC";
+    massRectangle[2].Width = 55;
+    massRectangle[2].Height = 66;
+
+    for (int i = 0; i < 3; i++) {
+        cout << "Ширина и высота прямоугольника: " << massRectangle[i].Width << "x" << massRectangle[i].Height;
+        cout << " цвет (eng): " << massRectangle[i].Color << endl;
+    }
 }
 void DemoFlight() {
     Flight flight;
+    Flight newFlight;
+    Flight massFlight[3];
     flight.Departure = "Moscow";
     flight.Destination = "Berlin";
     flight.Time = 360;
+
+    cout << "Введите место вылета: ";
+    cin >> newFlight.Departure;
+    cout << "Введите место прилета: ";
+    cin >> newFlight.Destination;
+    cout << "Введите время полета в минутах: ";
+    cin >> newFlight.Time;
+
+    cout << "Рейс: " << newFlight.Departure << " - " << newFlight.Destination << ", время полета: " << newFlight.Time << endl;
+
+    massFlight[0].Departure = "AAA";
+    massFlight[0].Destination = "BBB";
+    massFlight[0].Time = 100;
+
+    massFlight[1].Departure = "CCC";
+    massFlight[1].Destination = "DDD";
+    massFlight[1].Time = 200;
+
+    massFlight[2].Departure = "EEE";
+    massFlight[2].Destination = "FFF";
+    massFlight[2].Time = 300;
+
+    for (int i = 0; i < 3; i++) {
+        cout << "Рейс: " << massFlight[i].Departure << " - " << massFlight[i].Destination << ", время полета: " << massFlight[i].Time << endl;
+    }
 }
 void DemoMovie() {
     Movie movie;
-    movie.Genre = "Drama";
-    movie.Length = 180;
+    Movie newMovie;
+    Movie massMovie[3];
     movie.Name = "Star Wars";
-    movie.Rating = 7.2;
+    movie.Genre = "Drama";
+    movie.Length = 180;  
     movie.Year = 2323;
+    movie.Rating = 7.2;
 
+
+    cout << "Введите название фильма: ";
+    cin >> newMovie.Name;
+    cout << "Введите жанр фильма: ";
+    cin >> newMovie.Genre;
+    cout << "Введите длину фильма в минутах: ";
+    cin >> newMovie.Length;
+    cout << "Введите год выхода фильма: ";
+    cin >> newMovie.Year;
+    cout << "Введите рейтинг фильма: ";
+    cin >> newMovie.Rating;
+  
+    cout << "Фильм: " << newMovie.Name << ", жанр: " << newMovie.Genre << ", продолжительность: " << newMovie.Length << ", год выхода: " <<
+        newMovie.Year << ", оценка: " << newMovie.Rating << endl;
+
+    massMovie[0].Name = "AAA";
+    massMovie[0].Genre = "111";
+    massMovie[0].Length = 200;
+    massMovie[0].Year = 1999;
+    massMovie[0].Rating = 6.6;
+    
+
+    massMovie[1].Name = "BBB";
+    massMovie[1].Genre = "222";
+    massMovie[1].Length = 190;
+    massMovie[1].Year = 2000;
+    massMovie[1].Rating = 6.7;
+    
+
+    massMovie[2].Name = "CCC";
+    massMovie[2].Genre = "333";
+    massMovie[2].Length = 180;
+    massMovie[2].Year = 2001;
+    massMovie[2].Rating = 6.8;
+    
+
+    for (int i = 0; i < 3; i++) {
+        cout << "Фильм: " << massMovie[i].Name << ", жанр: " << massMovie[i].Genre << ", продолжительность: " << massMovie[i].Length << ", год выхода: " <<
+            massMovie[i].Year << ", оценка: " << massMovie[i].Rating << endl;
+    }
 }
 void DemoTime() {
     Time time;
+    Time newTime;
+    Time massTime[3];
     time.Hour = 12;
     time.Min = 45;
     time.Sec = 19;
+
+    cout << "Введите час времени (до 24): ";
+    cin >> newTime.Hour;
+    cout << "Введите минуту времени (до 60): ";
+    cin >> newTime.Min;
+    cout << "Введите секунду времени (до 60): ";
+    cin >> newTime.Sec;
+
+    cout << "Время: " << newTime.Hour << ":" << newTime.Min << ":" << newTime.Sec << endl;
+
+    massTime[0].Hour = 0;
+    massTime[0].Min = 0;
+    massTime[0].Sec = 0;
+
+    massTime[1].Hour = 1;
+    massTime[1].Min = 1;
+    massTime[1].Sec = 1;
+
+    massTime[2].Hour = 2;
+    massTime[2].Min = 2; 
+    massTime[2].Sec = 2;
+
+    for (int i = 0; i < 3; i++) {
+        cout << "Время: " << massTime[i].Hour << ":" << massTime[i].Min << ":" << massTime[i].Sec << endl;
+    }
 }
