@@ -63,6 +63,15 @@ void FindRectangle(Rectangle* rectangles, int count);
 //2.2.5.6
 void FindMaxRectangle(Rectangle* rectangles, int count);
 
+//2.2.6.1
+void DemoDynamicFlight();
+
+//2.2.6.2
+void DemoDynamicFlights();
+
+//2.2.6.3
+void FindShortestFlight(Flight* flights, int count);
+
 //2.2.2.2
 
 struct Contact {
@@ -84,7 +93,7 @@ struct Discipline {
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    DemoRectangle();
+    DemoDynamicFlights();
 }
 
 //2.2.1.1 and 2.2.1.2
@@ -147,7 +156,7 @@ void DemoRectangle() {
     massRectangle[0].Height = 22;
 
     massRectangle[1].Color = "BBB";
-    massRectangle[1].Width = 333;
+    massRectangle[1].Width = 33;
     massRectangle[1].Height = 44;
 
     massRectangle[2].Color = "CCC";
@@ -175,7 +184,6 @@ void DemoRectangle() {
     cout << " цвет (eng): " << massRectangle[1].Color << endl;
 
     
-    FindMaxRectangle(massRectangle, 3);
 }
 
 void DemoFlight() {
@@ -404,4 +412,60 @@ void FindMaxRectangle(Rectangle* rectangles, int count) {
         }
     }
     cout << "Прямоугольник с самой большой площадью: " << maxWidth << "x" << maxHeight << ", цвет: " << maxColor;
+}
+
+//2.2.6.1
+
+void DemoDynamicFlight() {
+    Flight* flight = new Flight();
+    flight->Departure = "Moskow";
+    flight->Destination = "Erevan";
+    flight->Time = 200;
+    cout << "Рейс: " << flight->Departure << " - " << flight->Destination << ", время полета: " << flight->Time << endl;
+    delete flight;
+}
+
+//2.2.6.2
+
+void DemoDynamicFlights() {
+    Flight* flight = new Flight[4];
+
+    flight[0].Departure = "Moskow";
+    flight[0].Destination = "Erevan";
+    flight[0].Time = 200;
+
+    flight[1].Departure = "Lima";
+    flight[1].Destination = "Belgrad";
+    flight[1].Time = 204;
+
+    flight[2].Departure = "Tomsk";
+    flight[2].Destination = "Cologne";
+    flight[2].Time = 220;
+
+    flight[3].Departure = "Novosibirsk";
+    flight[3].Destination = "Erevan";
+    flight[3].Time = 206;
+
+    for (int i = 0; i < 4; i++) {
+        cout << "Рейс: " << flight[i].Departure << " - " << flight[i].Destination << ", время полета: " << flight[i].Time << endl;
+    }
+    FindShortestFlight(flight, 4);
+    delete[] flight;
+}
+
+//2.2.6.3
+
+void FindShortestFlight(Flight* flights, int count) {
+    int minTime = flights->Time;
+    string minDep = flights->Departure;
+    string minDes = flights->Destination;
+    for (int i = 1; i < count; i++) {
+        if (minTime < flights->Time) {
+            minTime = flights->Time;
+            minDep = flights->Departure;
+            minDes = flights->Destination;
+        }
+    }
+    cout << "Самый короткий рейс:" << endl;
+    cout << "Рейс: " << minDep << " - " << minDes << ", время полета: " << minTime << endl;
 }
